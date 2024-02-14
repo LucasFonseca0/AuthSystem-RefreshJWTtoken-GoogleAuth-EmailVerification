@@ -17,16 +17,31 @@ export class Avatars {
 export class User {
   @Field()
   id: string;
+
   @Field()
   name: string;
+
+  @Field()
+  email: string;
+
   @Field()
   password: string;
-  @Field()
+
+  @Field(() => Avatars, { nullable: true })
   avatar?: Avatars | null;
+
   @Field()
   role: string;
+
+  @Field({ nullable: true })
+  address: string;
+
+  @Field({ nullable: true })
+  phone_number: number;
+
   @Field()
   createdAt: Date;
+
   @Field()
-  upadatedAt: Date;
+  updatedAt: Date;
 }
