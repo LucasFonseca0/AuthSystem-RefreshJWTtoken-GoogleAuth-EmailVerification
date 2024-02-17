@@ -12,15 +12,17 @@ const formSchema = z.object({
   name: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(8, "Password must be at least 8 characters long!"),
-  phone_number: z.number().min(11)
-
+  phone_number: z.number().min(11),
 });
 
 type SignUpSchema = z.infer<typeof formSchema>;
 
-const Signup = ({setActiveState,}:{setActiveState: (e: string) => void;}) => {
-
-    const [registerUserMutation,{loading}] = useMutation(REGISTER_USER)
+const Signup = ({
+  setActiveState,
+}: {
+  setActiveState: (e: string) => void;
+}) => {
+  const [registerUserMutation, { loading }] = useMutation(REGISTER_USER);
 
   const {
     register,
@@ -31,26 +33,26 @@ const Signup = ({setActiveState,}:{setActiveState: (e: string) => void;}) => {
     resolver: zodResolver(formSchema),
   });
 
-//   on submit
+  //   on submit
   const onSubmit = async (data: SignUpSchema) => {
+    try {
+      const response = await registerUserMutation({
+        variables: data,
+      });
+      localStorage.setItem(
+        "activation_token",
+        response.data.register.activation_token
+      );
 
-    try{
-        const response = await registerUserMutation({
-            variables:data
-        })
-        localStorage.setItem("activation_token",response.data.register.activation_token)
-        
-        toast.success("Please check your email to activate your accont")
-        reset()
-        setActiveState("Verification")
-    }catch(error:any){
-        toast.error(error.message)
-        
+      toast.success("Please check your email to activate your accont");
+      reset();
+      setActiveState("Verification");
+    } catch (error: any) {
+      toast.error(error.message);
     }
-
   };
 
-  return ( 
+  return (
     <div>
       <br />
       <h1 className={`${styles.title}`}>SignUp</h1>
@@ -66,10 +68,10 @@ const Signup = ({setActiveState,}:{setActiveState: (e: string) => void;}) => {
           />
         </div>
         {errors.name && (
-            <span className="text-red-500 block mt-1">
-              {`${errors.name.message}`} 
-            </span>
-          )}
+          <span className="text-red-500 block mt-1">
+            {`${errors.name.message}`}
+          </span>
+        )}
         {/* email input */}
         <label className={`${styles.label}`}>Enter your email</label>
         <input
@@ -87,17 +89,17 @@ const Signup = ({setActiveState,}:{setActiveState: (e: string) => void;}) => {
         <div className="w-full  relative mt-3">
           <label className={`${styles.label}`}>Enter your phone number</label>
           <input
-            {...register("phone_number",{valueAsNumber:true})}
+            {...register("phone_number", { valueAsNumber: true })}
             type="number"
             placeholder="+8801*******"
             className={`${styles.input}`}
           />
         </div>
         {errors.phone_number && (
-            <span className="text-red-500 block mt-1">
-              {`${errors.phone_number.message}`}
-            </span>
-          )}
+          <span className="text-red-500 block mt-1">
+            {`${errors.phone_number.message}`}
+          </span>
+        )}
         {/* password input */}
         <div className="w-full mt-5 relative mb-1">
           <label htmlFor="password" className={`${styles.label}`}>
@@ -116,7 +118,7 @@ const Signup = ({setActiveState,}:{setActiveState: (e: string) => void;}) => {
           )}
         </div>
 
-          {/* submit button */}
+        {/* submit button */}
         <div className="w-full mt-5">
           <input
             type="submit"

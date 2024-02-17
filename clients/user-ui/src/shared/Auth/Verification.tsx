@@ -1,7 +1,6 @@
 import { ACTIVATE_USER } from "@/src/graphql/actions/activation.action";
 import styles from "@/src/utils/style";
 import { useMutation } from "@apollo/client";
-import { error } from "console";
 import { FC, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
@@ -11,7 +10,7 @@ type Props = {
 };
 
 type VerifyNumber = {
-  "0": string; 
+  "0": string;
   "1": string;
   "2": string;
   "3": string;
@@ -39,27 +38,26 @@ const Verification: FC<Props> = ({ setActiveState }) => {
     const verificationNumber = Object.values(verifyNumber).join("");
     const activationToken = localStorage.getItem("activation_token");
 
-    
     if (verificationNumber.length !== 4) {
       setInvalidError(true);
       return;
     } else {
-        try {
-            const data = {
-                activationToken,
-                activationCode: verificationNumber
-            }
+      try {
+        const data = {
+          activationToken,
+          activationCode: verificationNumber,
+        };
         await ActivateUser({
-            variables:data
-          })
-          toast.success("account activated successfully")
-          setActiveState("Login")
-        } catch (error:any) {
-          toast.error(error.message)
-
-  
-        }
-  }};
+          variables: data,
+        });
+        localStorage.removeItem("activation_token");
+        toast.success("account activated successfully");
+        setActiveState("Login");
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    }
+  };
 
   const handleInputChange = (index: number, value: string) => {
     setInvalidError(false);

@@ -41,3 +41,11 @@ export class LogoutResponse {
   @Field()
   message: string
 }
+
+@ObjectType()
+export class ForgotPasswordResponse {
+  @Field()
+  message: string;
+  @Field(() => ErrorType, { nullable: true })
+  error?: ErrorType;
+}
