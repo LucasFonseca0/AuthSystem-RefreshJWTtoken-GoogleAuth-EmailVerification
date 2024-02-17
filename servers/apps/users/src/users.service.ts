@@ -1,7 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService, JwtVerifyOptions } from '@nestjs/jwt';
-import { ActivationDto, ForgotPasswordDto, LoginDto, RegisterDto, ResetPasswordDto } from './dto/user.dto';
+import {
+  ActivationDto,
+  ForgotPasswordDto,
+  LoginDto,
+  RegisterDto,
+  ResetPasswordDto,
+} from './dto/user.dto';
 
 import { PrismaService } from '../../../prisma/Prisma.service';
 import { Response } from 'express';
@@ -141,66 +147,78 @@ export class UsersService {
       };
     }
   }
-  
+
   // compare with hashedpassword
   async comparePassword(
     password: string,
     hashedPassword: string,
-    ): Promise<Boolean> {
-      return await bcrypt.compare(password, hashedPassword);
-    }
-    //generate forgot password link
-    async generateForgotPasswordLink(user:User){
-      const forgotPasswordToken = this.jwtService.sign({
-        user
-      },{
-        secret:this.configService.get<string>('FORGOT_PASSWORD_SECRET'),
-        expiresIn:'5m'
-      })
+  ): Promise<Boolean> {
+    return await bcrypt.compare(password, hashedPassword);
+  }
+  //generate forgot password link
+  async generateForgotPasswordLink(user: User) {
+    const forgotPasswordToken = this.jwtService.sign(
+      {
+        user,
+      },
+      {
+        secret: this.configService.get<string>('FORGOT_PASSWORD_SECRET'),
+        expiresIn: '5m',
+      },
+    );
 
-      return forgotPasswordToken
-    }
-  
-    //forgot password
-    async forgotPassword(forgotPasswordDto:ForgotPasswordDto){
-      const {email} = forgotPasswordDto
-  
-      const user = await this.prisma.user.findUnique({
-        where:{
-          email
-        }
-      }) 
-  
-      if(!user) throw new BadRequestException('User not found with this email')
-      
-      const forgotPasswordToken = await this.generateForgotPasswordLink(user)
-      
-      const resetPasswordUrl = this.configService.get<string>('CLIENT_SIDE_URL') + `/reset-password?verify=${forgotPasswordToken}`
-      console.log(resetPasswordUrl)
-      await this.emailService.sendMail({
+    return forgotPasswordToken;
+  }
+
+  //forgot password
+  async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
+    const { email } = forgotPasswordDto;
+
+    const user = await this.prisma.user.findUnique({
+      where: {
         email,
-        subject: "Reset your password",
-        template:"./forgot-password",
-        name:user.name,
-        activationCode: resetPasswordUrl
-      })
- 
-      return {message: `Your forgot password request successful`}
-    }
-    //resetPassword 
-    async resetPassword(resetPasswordDto:ResetPasswordDto){
-      const {password,activationToken} = resetPasswordDto
+      },
+    });
 
-      const decoded = await this.jwtService.decode(activationToken)
+    if (!user) throw new BadRequestException('User not found with this email');
 
-      if(!decoded) throw new BadRequestException('invalid token!')
+    const forgotPasswordToken = await this.generateForgotPasswordLink(user);
 
-      const hashedPassword = await bcrypt.hash(password,10)
+    const resetPasswordUrl =
+      this.configService.get<string>('CLIENT_SIDE_URL') +
+      `/reset-password?verify=${forgotPasswordToken}`;
+    console.log(resetPasswordUrl);
+    await this.emailService.sendMail({
+      email,
+      subject: 'Reset your password',
+      template: './forgot-password',
+      name: user.name,
+      activationCode: resetPasswordUrl,
+    });
 
-      const user = this.prisma.user.findUnique({where:{
-        id: decoded.user.id
-      }})
-    }
+    return { message: `Your forgot password request successful` };
+  }
+  //resetPassword
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    const { password, activationToken } = resetPasswordDto;
+
+    const decoded = await this.jwtService.decode(activationToken);
+
+    if (!decoded) throw new BadRequestException('invalid token!');
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await this.prisma.user.update({
+      where: {
+        id: decoded.user.id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    return {user}
+  }
   //Get logged in user
   async getLoggedInUser(req: any) {
     const accessToken = req.accessToken;

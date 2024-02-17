@@ -49,3 +49,10 @@ export class ForgotPasswordResponse {
   @Field(() => ErrorType, { nullable: true })
   error?: ErrorType;
 }
+@ObjectType()
+export class ResetPasswordResponse {
+  @Field()
+  user: User | any;
+  @Field(() => ErrorType, { nullable: true })
+  error?: ErrorType;
+}
