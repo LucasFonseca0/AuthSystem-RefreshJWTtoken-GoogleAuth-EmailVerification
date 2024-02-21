@@ -67,7 +67,7 @@ export class ResetPasswordDto {
   @MinLength(8, { message: 'Password must be least 8 characters' })
   @IsString()
   password: string;
-
+  @Field()
   @IsNotEmpty({message:'Activation Token is required'})
   activationToken:string
   

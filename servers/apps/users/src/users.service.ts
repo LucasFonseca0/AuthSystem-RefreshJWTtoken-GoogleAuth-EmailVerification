@@ -152,7 +152,7 @@ export class UsersService {
   async comparePassword(
     password: string,
     hashedPassword: string,
-  ): Promise<Boolean> {
+  ): Promise<boolean> {
     return await bcrypt.compare(password, hashedPassword);
   }
   //generate forgot password link
@@ -204,12 +204,12 @@ export class UsersService {
 
     const decoded = await this.jwtService.decode(activationToken);
 
-    if (!decoded) throw new BadRequestException('invalid token!');
+    if (!decoded || decoded?.exp < Date.now()) throw new BadRequestException('invalid token!');
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await this.prisma.user.update({
-      where: {
+      where: { 
         id: decoded.user.id,
       },
       data: {

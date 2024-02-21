@@ -63,14 +63,14 @@ export class UsersResolver {
     return this.userService.getLoggedInUser(context.req);
   }
   //forgot password and send thre email
-  @Query(() => ForgotPasswordResponse)
+  @Mutation(() => ForgotPasswordResponse)
   async forgotPassword(
     @Args('forgotPasswordDto') forgotPasswordDto: ForgotPasswordDto,
   ): Promise<ForgotPasswordResponse> {
     return this.userService.forgotPassword(forgotPasswordDto);
   }
   //reset password after email
-  @Query(() => ResetPasswordResponse)
+  @Mutation(() => ResetPasswordResponse) 
   async resetPassword(
     @Args('resetPasswordDto') resetPasswordDto: ResetPasswordDto,
   ): Promise<ResetPasswordResponse> {
