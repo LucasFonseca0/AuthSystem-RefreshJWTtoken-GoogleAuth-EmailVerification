@@ -1,12 +1,12 @@
-import styles from "@/src/utils/style";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { AiFillGithub } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import { useMutation } from "@apollo/client";
 import { REGISTER_USER } from "@/src/graphql/actions/register.action";
+import styles from "@/src/utils/style";
+import { useMutation } from "@apollo/client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -55,7 +55,7 @@ const Signup = ({
   return (
     <div>
       <br />
-      <h1 className={`${styles.title}`}>SignUp</h1>
+      <h1 className={`${styles.title}`}>SignUp with Yummi</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Name input */}
         <div className="w-full  relative mb-3">
@@ -132,9 +132,11 @@ const Signup = ({
         <h5 className="text-center pt-4 font-Poppins text-[16px] text-white">
           or join with
         </h5>
-        <div className="flex items-center justify-center my-3">
+        <div
+          className="flex items-center justify-center my-3"
+          onClick={() => signIn()}
+        >
           <FcGoogle size={30} className="cursor-pointer mr-2" />
-          <AiFillGithub size={30} className="cursor-pointer ml-2" />
         </div>
 
         <h5 className="text-center pt-4 font-Poppins text-[14px]">

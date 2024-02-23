@@ -9,7 +9,8 @@ const Header = () => {
      
         <div className="w-[90%] h-[80px] m-auto flex items-center justify-between" >
             <h1 className={`${styles.logo}`}>
-                Becodemy
+                
+                Yummi
             </h1>
             <NavItems/>
             <ProfileDropdown/>

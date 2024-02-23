@@ -204,7 +204,7 @@ export class UsersService {
 
     const decoded = await this.jwtService.decode(activationToken);
 
-    if (!decoded || decoded?.exp < Date.now()) throw new BadRequestException('invalid token!');
+    if (!decoded || decoded?.exp < Math.floor(Date.now() / 1000)) throw new BadRequestException('invalid token!');
 
     const hashedPassword = await bcrypt.hash(password, 10);
 

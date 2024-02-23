@@ -36,6 +36,7 @@ const ResetPassword = ({activationToken}:{activationToken:string |string[]|undef
   });
 
   const onSubmit = async (data: ResetPasswordSchema) => {
+    console.log(activationToken)
     try {
       const {password} = data
 
@@ -52,7 +53,7 @@ const ResetPassword = ({activationToken}:{activationToken:string |string[]|undef
   return (
     <div className="w-full flex justify-center items-center h-screen">
       <div className="md:w-[500px] w-full">
-          <h1 className={`${styles.title}`}>Reset with Becodemy</h1>
+          <h1 className={`${styles.title}`}>Reset with Yummi</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
           
             <div className="w-full mt-5 relative mb-1">

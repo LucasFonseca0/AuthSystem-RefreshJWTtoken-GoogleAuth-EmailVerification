@@ -34,7 +34,7 @@ const ForgotPassword = ({
       const response = await forgotPassword({
         variables: { email: data.email },
       });
-      toast.success("Check your Email!")
+      toast.success("Please check your email to change the password!");
       reset()
     } catch (error: any) {
       toast.error(error.message);

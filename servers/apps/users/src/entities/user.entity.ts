@@ -37,7 +37,7 @@ export class User {
   address: string;
 
   @Field({ nullable: true })
-  phone_number: number;
+  phone_number: number | null;
 
   @Field()
   createdAt: Date;

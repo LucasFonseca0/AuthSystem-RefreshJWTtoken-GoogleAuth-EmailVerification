@@ -1,13 +1,13 @@
-import styles from "@/src/utils/style";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { AiFillGithub } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import toast from "react-hot-toast";
-import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "@/src/graphql/actions/login.action";
+import styles from "@/src/utils/style";
+import { useMutation } from "@apollo/client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -48,7 +48,7 @@ const Login = ({
         Cookies.set("access_token", response.data.Login.accessToken);
         setOpen(false);
         reset();
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error: any) {
       console.log(error);
@@ -59,7 +59,7 @@ const Login = ({
   return (
     <div>
       <br />
-      <h1 className={`${styles.title}`}>Login with Becodemy</h1>
+      <h1 className={`${styles.title}`}>Login with Yummi</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className={`${styles.label}`}>Enter your email</label>
         <input
@@ -91,8 +91,8 @@ const Login = ({
         </div>
         <div className="w-full mt-5">
           <span
-            className={`${styles.label} my-2 text-[#2190ff] block text-right cursor-pointer`
-          } onClick={()=>setActiveState("Forgot-password")}
+            className={`${styles.label} my-2 text-[#2190ff] block text-right cursor-pointer`}
+            onClick={() => setActiveState("Forgot-password")}
           >
             Forgot your password?{" "}
           </span>
@@ -107,9 +107,11 @@ const Login = ({
         <h5 className="text-center pt-4 font-Poppins text-[16px] text-white">
           or join with
         </h5>
-        <div className="flex items-center justify-center my-3">
+        <div
+          className="flex items-center justify-center my-3"
+          onClick={() => signIn()}
+        >
           <FcGoogle size={30} className="cursor-pointer mr-2" />
-          <AiFillGithub size={30} className="cursor-pointer ml-2" />
         </div>
         <h5 className="text-center pt-4 font-Poppins text-[14px]">
           Not have any account?

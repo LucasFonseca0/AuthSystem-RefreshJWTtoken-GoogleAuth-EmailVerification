@@ -5,7 +5,7 @@ import Verification from "../shared/Auth/Verification";
 import ForgotPassword from "../shared/Auth/ForgotPassword";
 
 const AuthScreen = ({setOpen}:{setOpen:(e:boolean)=> void}) => {
-  const [activeState, setActiveState] = useState("Forgot-password");
+  const [activeState, setActiveState] = useState("Login");
 
   const handleClose = (e:React.MouseEvent<HTMLDivElement>) => {
     if(e.target instanceof HTMLDivElement && e.target.id == "screen"){
