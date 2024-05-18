@@ -78,9 +78,9 @@ AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack 
    cd AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification/servers
 
 2. Instale as dependências:
-   ```npm install
+   ```npm install```
    # ou
-   ```yarn install
+   ```yarn install```
 
 3. Configure as variáveis de ambiente no arquivo `.env`.
 
