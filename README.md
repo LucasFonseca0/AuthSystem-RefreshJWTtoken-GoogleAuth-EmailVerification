@@ -79,7 +79,7 @@ AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack 
 
 2. Instale as dependências:
    ```npm install```
-   # ou
+    ou
    ```yarn install```
 
 3. Configure as variáveis de ambiente no arquivo `.env`.
@@ -88,26 +88,26 @@ AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack 
    npx prisma migrate dev
 
 5. Inicie o servidor de desenvolvimento:
-   ```npm run start:dev
-   # ou
+   ```npm run start:dev```
+    ou
    ```yarn start:dev
 
 ### Frontend
 
 1. Navegue até o diretório do frontend:
-   ```cd ../clients/user-ui
+   ```cd ../clients/user-ui```
 
 2. Instale as dependências:
-   ```npm install
-   # ou
-   ```yarn install
+   ```npm install```
+    ou
+   ```yarn install```
 
 3. Configure as variáveis de ambiente no arquivo `.env.local`.
 
 4. Inicie o servidor de desenvolvimento:
-   ```npm run dev
-   # ou
-   ```yarn dev
+   ```npm run dev```
+    ou
+   ```yarn dev```
 
 ## Uso
 
