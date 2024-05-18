@@ -85,7 +85,7 @@ AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack 
 3. Configure as variáveis de ambiente no arquivo `.env`.
 
 4. Rode as migrações do banco de dados:
-   npx prisma migrate dev
+   ```npx prisma migrate dev```
 
 5. Inicie o servidor de desenvolvimento:
    ```npm run start:dev```
