@@ -1,50 +1,51 @@
 # AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification
 
-## Descrição
+## Description
 
-AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack que fornece um sistema de autenticação robusto. O backend é construído com NestJS e o frontend com Next.js. O sistema inclui autenticação JWT com refresh tokens, autenticação via Google, e verificação de email.
+AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification is a fullstack project that provides a robust authentication system. The backend is built with NestJS and the frontend with Next.js. The system includes JWT authentication with refresh tokens, authentication via Google, and email verification.
 
 ![image](https://github.com/LucasFonseca0/AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification/assets/151788899/cc964e4e-42ad-4e15-b7af-ab844a676372)
 ![image](https://github.com/LucasFonseca0/AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification/assets/151788899/cd4b6d0b-0cc3-47a1-a13f-3e30931945c8)
-## Funcionalidades
+
+## Features
 
 ### Backend (NestJS)
-- Registro de usuários
-- Ativação de conta via email
-- Login de usuários
-- Logout de usuários
-- Recuperação de senha
-- Reset de senha via email
-- Obtenção de informações do usuário logado
-- Listagem de todos os usuários
+- User registration
+- Account activation via email
+- User login
+- User logout
+- Password recovery
+- Password reset via email
+- Retrieval of logged-in user information
+- Listing of all users
 
 ### Frontend (Next.js)
-- Interfaces de registro, login, e recuperação de senha
-- Integração com o backend para autenticação e autorização
-- Autenticação via Google
-- Verificação de email
+- Registration, login, and password recovery interfaces
+- Integration with the backend for authentication and authorization
+- Authentication via Google
+- Email verification
 
-## Estrutura do Projeto
+## Project Structure
 
 ### Backend
 
-#### Diretórios Principais
-- `src`: Contém todo o código fonte do backend
+#### Main Directories
+- `src`: Contains all the backend source code
   - `dto`: Data Transfer Objects
-  - `entities`: Definição das entidades do banco de dados
-  - `guards`: Guards para proteção de rotas
-  - `types`: Tipos e interfaces usados nas resolvers
-  - `users`: Contém os services e resolvers relacionados aos usuários
+  - `entities`: Definition of database entities
+  - `guards`: Guards for route protection
+  - `types`: Types and interfaces used in resolvers
+  - `users`: Contains the services and resolvers related to users
 
-#### Dependências Principais
-- `@nestjs/common`, `@nestjs/core`: Framework NestJS
-- `@nestjs/graphql`: Integração do GraphQL com NestJS
-- `@nestjs/jwt`: Suporte a JWT
-- `@nestjs-modules/mailer`: Envio de emails
-- `bcrypt`: Criptografia de senhas
-- `prisma`: ORM para interações com o banco de dados
+#### Main Dependencies
+- `@nestjs/common`, `@nestjs/core`: NestJS Framework
+- `@nestjs/graphql`: GraphQL integration with NestJS
+- `@nestjs/jwt`: JWT support
+- `@nestjs-modules/mailer`: Email sending
+- `bcrypt`: Password encryption
+- `prisma`: ORM for database interactions
 
-#### Comandos Principais
+#### Main Commands
 - build: nest build
 - start: nest start
 - start:dev: nest start --watch
@@ -53,76 +54,73 @@ AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack 
 
 ### Frontend
 
-#### Diretórios Principais
-- `pages`: Contém as páginas da aplicação Next.js
-- `components`: Componentes reutilizáveis
-- `services`: Integração com APIs
-- `contexts`: Contextos de autenticação e estado global
+#### Main Directories
+- `pages`: Contains the Next.js application pages
+- `components`: Reusable components
+- `services`: API integration
+- `contexts`: Authentication contexts and global state
 
-#### Dependências Principais
-- `next`: Framework React para renderização do lado do servidor
-- `react`, `react-dom`: Biblioteca React
-- `axios`: Requisições HTTP
-- `jsonwebtoken`: Manipulação de JWT
+#### Main Dependencies
+- `next`: React Framework for server-side rendering
+- `react`, `react-dom`: React Library
+- `axios`: HTTP requests
+- `jsonwebtoken`: JWT manipulation
 
-## Instalação
+## Installation
 
-### Pré-requisitos
-- Node.js (versão LTS recomendada)
-- Yarn ou npm
+### Prerequisites
+- Node.js (LTS version recommended)
+- Yarn or npm
 
 ### Backend
 
-1. Clone o repositório:
+1. Clone the repository:
    git clone https://github.com/LucasFonseca0/AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification.git
    cd AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification/servers
 
-2. Instale as dependências:
+2. Install the dependencies:
    ```npm install```
-    ou
+    or
    ```yarn install```
 
-3. Configure as variáveis de ambiente no arquivo `.env`.
+3. Configure the environment variables in the `.env` file.
 
-4. Rode as migrações do banco de dados:
+4. Run the database migrations:
    ```npx prisma migrate dev```
 
-5. Inicie o servidor de desenvolvimento:
+5. Start the development server:
    ```npm run start:dev```
-    ou
-   ```yarn start:dev
+    or
+   ```yarn start:dev```
 
 ### Frontend
 
-1. Navegue até o diretório do frontend:
+1. Navigate to the frontend directory:
    ```cd ../clients/user-ui```
 
-2. Instale as dependências:
+2. Install the dependencies:
    ```npm install```
-    ou
+    or
    ```yarn install```
 
-3. Configure as variáveis de ambiente no arquivo `.env.local`.
+3. Configure the environment variables in the `.env.local` file.
 
-4. Inicie o servidor de desenvolvimento:
+4. Start the development server:
    ```npm run dev```
-    ou
+    or
    ```yarn dev```
 
-## Uso
+## Usage
 
-1. Acesse o frontend no seu navegador:
+1. Access the frontend in your browser:
    http://localhost:3000
 
-2. Utilize as funcionalidades de registro, login, recuperação de senha, etc.
+2. Use the registration, login, password recovery features, etc.
 
-## Contribuição
+## Contribution
 
-1. Fork o repositório
-2. Crie uma nova branch (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-
-
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Open a Pull Request
