@@ -124,10 +124,5 @@ AuthSystem-RefreshJWTtoken-GoogleAuth-EmailVerification é um projeto fullstack 
 4. Push para a branch (`git push origin feature/nova-feature`)
 5. Abra um Pull Request
 
-## Licença
 
-Este projeto é licenciado sob a licença UNLICENSED.
 
----
-
-Este é um esqueleto básico do README. Dependendo das especificidades do seu projeto e da configuração do seu ambiente, ajustes podem ser necessários.
